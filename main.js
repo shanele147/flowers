@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const rect = flower.getBoundingClientRect();
       // console.log(rect);
       // NEW POSITIONING LOGIC
-      const left = rect.left - rect.width * 0.2; // center of flower
+      const left = rect.left - rect.width * 0.1; // center of flower
       const top = rect.top; // a bit above flower
 
       // Apply directly
