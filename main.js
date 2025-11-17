@@ -3,6 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const popupBox = popup.querySelector(".popup-box");
   const popupMessage = document.getElementById("popup-message");
   const closeBtn = document.getElementById("close-popup");
+  document.addEventListener("click", function () {
+    const audio = document.getElementById("bg-audio");
+    audio.muted = false;
+    audio.play();
+}, { once: true });
+
 
   document.querySelectorAll(".flower").forEach((flower) => {
     flower.addEventListener("click", () => {
