@@ -35,7 +35,7 @@ body {
   height: 100vh;
 
   /* Sky + grass background */
-  background: url("/assets/grass-background.jpg") no-repeat center center;
+  background: url("assets/grass-background.jpg") no-repeat center center;
   background-size: cover;
 }
 
