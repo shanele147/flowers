@@ -1,0 +1,199 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: "Arial", sans-serif;
+}
+
+/* First-time popup */
+.first-popup {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1rem 1.5rem;
+  border-radius: 0.825rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  font-size: 18px;
+  color: #ff4d82;
+  text-align: center;
+  z-index: 1000;
+  font-size: 1.5rem;
+  /*Animation:;
+    fadeoutafter5seconds*/
+  animation: fadeOut 3s forwards;
+  -webkit-border-radius: 0.825rem;
+  -moz-border-radius: 0.825rem;
+  -ms-border-radius: 0.825rem;
+  -o-border-radius: 0.825rem;
+}
+
+.field {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+
+  /* Sky + grass background */
+  background: url("/assets/grass-background.jpg") no-repeat center center;
+  background-size: cover;
+}
+
+/* Flower positions controlled via inline style */
+.flower {
+  position: absolute;
+  width: 18rem;
+  bottom: -23%;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease;
+}
+
+.field > .flower:nth-child(1) {
+  left: 12%;
+}
+
+.field > .flower:nth-child(2) {
+  left: 30%;
+}
+.field > .flower:nth-child(3) {
+  right: 9%;
+  width: 25rem;
+  bottom: -25%;
+}
+
+.field > .flower:nth-child(4) {
+  left: 49%;
+  width: 22rem;
+  bottom: -28%;
+}
+
+.field > .flower:nth-child(5) {
+  right: -3%;
+  bottom: -28%;
+}
+
+.flower:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Popup styling */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup.hidden {
+  display: none;
+}
+
+.popup-box {
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+  gap: 1rem;
+  max-width: 24rem;
+  line-height: 1.5;
+  position: absolute;
+  background: white;
+  padding: 0.825rem 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transform: translateY(-50%);
+  pointer-events: auto; /* Enable clicking button */
+  min-width: 180px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+#close-popup {
+  padding: 0.35rem 0.5rem;
+  border: none;
+  background: #ff6b9d;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* #close-popup:hover {
+    background: #ff4d82;
+} */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  html {
+    font-size: 14px;
+  }
+  .flower {
+    width: 15rem;
+    bottom: -17%;
+  }
+  .field > .flower:nth-child(1) {
+    width: 16rem;
+  }
+  .field > .flower:nth-child(3) {
+    width: 21rem;
+    right: 7%;
+    bottom: -19%;
+  }
+  .field > .flower:nth-child(4) {
+    width: 20rem;
+    bottom: -23%;
+  }
+  .field > .flower:nth-child(5) {
+    right: -7%;
+    bottom: -21.5%;
+  }
+}
+
+@media screen and (max-width: 1224px) {
+  html {
+    font-size: 13px;
+  }
+  .flower {
+    width: 15rem;
+    bottom: -17%;
+  }
+  .field > .flower:nth-child(1) {
+    width: 16rem;
+  }
+  .field > .flower:nth-child(3) {
+    width: 21rem;
+    right: 7%;
+  }
+  .field > .flower:nth-child(4) {
+    width: 20rem;
+  }
+  .field > .flower:nth-child(5) {
+    right: -7%;
+  }
+}

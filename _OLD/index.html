@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Penguin Surprise</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f0f5ff;
+      font-family: "Arial", sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Penguin */
+    .penguin {
+      width: 180px;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+      position: absolute;
+      bottom: 25%;
+      z-index: 5;
+    }
+
+    .penguin:hover {
+      transform: scale(1.05);
+    }
+
+    /* Rope */
+    .rope {
+      position: absolute;
+      top: -250px;
+      /* hidden above the screen */
+      width: 6px;
+      height: 250px;
+      background: #444;
+      border-radius: 3px;
+      transition: top 1.8s ease-out;
+      /* slow dropping animation */
+    }
+
+    /* .rope::before,
+    .rope::after {
+      content: "";
+      position: absolute;
+      width: 108px;
+      height: 190px;
+      background: #ff4d6d;
+      border-radius: 60px 60px 0 0;
+      top: 160px;
+    }
+
+    .rope::before {
+      left: -80px;
+      transform: rotate(-45deg);
+    }
+
+    .rope::after {
+      right: -80px;
+      transform: rotate(45deg);
+    } */
+
+    /* CSS Heart (Hidden initially) */
+    .heart {
+      position: absolute;
+      top: -50%;
+      width: 120px;
+      height: 120px;
+      /* opacity: 0;
+      transform: scale(0.2); */
+      transition: top 1.8s ease-out;
+    }
+
+    /* Heart shape using CSS */
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 108px;
+      height: 190px;
+      background: #ff4d6d;
+      border-radius: 60px 60px 0 0;
+      top: 0;
+    }
+
+    .heart::before {
+      left: -24px;
+      transform: rotate(-45deg);
+      top: 16px;
+    }
+
+    .heart::after {
+      right: -24px;
+      transform: rotate(45deg);
+      top: 16px;
+    }
+
+    /* Message */
+    .message {
+      position: absolute;
+      bottom: 50%;
+      font-size: 28px;
+      color: #ff4d6d;
+      opacity: 0;
+      transition: opacity 1s ease;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Rope -->
+  <div class="rope" id="rope"></div>
+
+  <!-- Penguin -->
+  <img src="/penguin.jpg" alt="Penguin" class="penguin" id="penguin">
+
+  <!-- CSS Heart -->
+  <div class="heart" id="heart"></div>
+
+  <!-- Message -->
+  <div class="message" id="message">Hope it will bright your day</div>
+
+  <script>
+    const penguin = document.getElementById("penguin");
+    const rope = document.getElementById("rope");
+    const heart = document.getElementById("heart");
+    const message = document.getElementById("message");
+
+    penguin.addEventListener("click", () => {
+      // Rope pull animation
+      rope.style.top = "0px"; 
+      heart.style.top = "18%";    // rope drops down
+      // Heart appears      
+      /* setTimeout(() => {
+        heart.style.top = "18%";
+      }, 100); */
+
+      // Message fade-in
+      setTimeout(() => {
+        message.style.opacity = "1";
+      }, 900);
+    });
+  </script>
+
+</body>
+
+</html>

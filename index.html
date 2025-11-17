@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flower Field</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <audio controls autoplay loop>
+    <source src="assets/Avanti - Je T'aime.mp3" type="audio/mpeg">
+  </audio>
+  <!-- First-time popup -->
+  <div class="first-popup">
+    Welcome bae 😊! Click on any flower that you like!
+  </div>
+  <div class="field">
+    <!-- Example flowers (add as many as you want) -->
+    <img src="assets/flower1.png" class="flower"
+      data-message="You are a beautiful blend of softness and tenderness, wrapped in a core of strength and fortitude. I love both your sides!">
+    <img src="assets/flower5.png" class="flower"
+      data-message="These are daisy flowers that symbolize innocence and purity. This is you through my eyes.">
+    <img src="assets/flower2.png" class="flower"
+      data-message="I can't bring you a beautiful bouquet right now, so I want to send you this in my own way. I hope you can see the most favourite flower you like 😉">
+    <img src="assets/flower3.png" class="flower"
+      data-message="Can you guess what flower this is? It's a delphinium, just like our connection, because delphiniums represent strong bonds of love and deep affection.">
+    <img src="assets/flower4.png" class="flower"
+      data-message="Forget me not is the name of this flower. Just like its name, I will never forget you.">
+  </div>
+
+  <!-- Popup -->
+  <div id="popup" class="popup hidden">
+    <div class="popup-box">
+      <span id="popup-message"></span>
+      <button id="close-popup">X</button>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
