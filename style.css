@@ -15,7 +15,6 @@ body {
   padding: 1rem 1.5rem;
   border-radius: 0.825rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  font-size: 18px;
   color: #ff4d82;
   text-align: center;
   z-index: 1000;
@@ -33,43 +32,44 @@ body {
   position: relative;
   width: 100vw;
   height: 100vh;
-
   /* Sky + grass background */
-  background: url("assets/grass-background.jpg") no-repeat center center;
+  background: url("images/background-desktop.jpg") no-repeat top right;
   background-size: cover;
 }
 
 /* Flower positions controlled via inline style */
 .flower {
   position: absolute;
-  width: 18rem;
-  bottom: -23%;
+  width: 15rem;
+  bottom: -20%;
   cursor: pointer;
   transform: translate(-50%, -50%);
   transition: transform 0.2s ease;
 }
 
-.field > .flower:nth-child(1) {
-  left: 12%;
+.field>picture:nth-child(1)>.flower {
+  left: 10%;
+  bottom: -32%;
 }
 
-.field > .flower:nth-child(2) {
-  left: 30%;
-}
-.field > .flower:nth-child(3) {
-  right: 9%;
-  width: 25rem;
-  bottom: -25%;
-}
-
-.field > .flower:nth-child(4) {
-  left: 49%;
-  width: 22rem;
+.field>picture:nth-child(2)>.flower {
+  left: 29%;
   bottom: -28%;
 }
 
-.field > .flower:nth-child(5) {
-  right: -3%;
+.field>picture:nth-child(3)>.flower {
+  left: 47%;
+  bottom: -26%;
+}
+
+.field>picture:nth-child(4)>.flower {
+  right: 9%;
+  width: 22rem;
+  bottom: -22%;
+}
+
+.field>picture:nth-child(5)>.flower {
+  right: -5%;
   bottom: -28%;
 }
 
@@ -80,6 +80,7 @@ body {
 /* Popup styling */
 .popup {
   position: fixed;
+  z-index: 100;
   top: 0;
   left: 0;
   width: 100%;
@@ -107,7 +108,8 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   transform: translateY(-50%);
-  pointer-events: auto; /* Enable clicking button */
+  pointer-events: auto;
+  /* Enable clicking button */
   min-width: 180px;
   animation: fadeIn 0.25s ease-out;
 }
@@ -131,18 +133,22 @@ body {
     opacity: 0;
     transform: translateY(-50%) scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: translateY(-50%) scale(1);
   }
 }
+
 @keyframes fadeOut {
   0% {
     opacity: 1;
   }
+
   80% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
     display: none;
@@ -153,47 +159,110 @@ body {
   html {
     font-size: 14px;
   }
+
   .flower {
     width: 15rem;
     bottom: -17%;
   }
-  .field > .flower:nth-child(1) {
+
+  .field>picture:nth-child(1)>.flower {
     width: 16rem;
   }
-  .field > .flower:nth-child(3) {
-    width: 21rem;
+
+  .field>picture:nth-child(3)>.flower {
+    width: 16rem;
     right: 7%;
-    bottom: -19%;
+    bottom: -26%;
   }
-  .field > .flower:nth-child(4) {
+
+  /* .field>picture:nth-child(4)>.flower {
     width: 20rem;
     bottom: -23%;
-  }
-  .field > .flower:nth-child(5) {
+  } */
+
+  .field>picture:nth-child(5)>.flower {
     right: -7%;
     bottom: -21.5%;
   }
 }
 
-@media screen and (max-width: 1224px) {
+/* @media screen and (max-width: 1224px) {
   html {
     font-size: 13px;
   }
+
+  .field {
+    background: url("images/background-tablet.jpg") no-repeat top center;
+    background-size: cover;
+  }
+
   .flower {
-    width: 15rem;
+    width: 12rem;
     bottom: -17%;
   }
-  .field > .flower:nth-child(1) {
+
+  .field>picture:nth-child(1)>.flower {
     width: 16rem;
   }
-  .field > .flower:nth-child(3) {
+
+  .field>picture:nth-child(3)>.flower {
     width: 21rem;
     right: 7%;
   }
-  .field > .flower:nth-child(4) {
+
+  .field>picture:nth-child(4)>.flower {
     width: 20rem;
   }
-  .field > .flower:nth-child(5) {
+
+  .field>picture:nth-child(5)>.flower {
     right: -7%;
+  }
+} */
+
+@media screen and (max-width: 480px) {
+  .first-popup {
+    width: 80%;
+    max-width: 80%;
+    padding: 1rem;
+    font-size: 1.25rem;
+  }
+
+  .field {
+    background: url("images/background-mobile.jpg") no-repeat center center;
+    background-size: cover;
+  }
+
+  .field>picture:nth-child(1)>.flower {
+    width: 13rem;
+    left: 18%;
+    bottom: -26%;
+    z-index: 3;
+  }
+
+  .field>picture:nth-child(2)>.flower {
+    width: 14rem;
+    left: 48%;
+    bottom: -24%;
+    z-index: 6;
+  }
+
+  .field>picture:nth-child(3)>.flower {
+    width: 14rem;
+    left: 33%;
+    bottom: -2%;
+  }
+
+  .field>picture:nth-child(4)>.flower {
+    width: 16rem;
+    right: -28%;
+    bottom: -2%;
+    z-index: 4;
+  }
+
+  .field>picture:nth-child(5)>.flower {
+    width: 14rem;
+    right: -29%;
+    bottom: -27%;
+    z-index: 5;
   }
 }
