@@ -175,14 +175,15 @@ body {
     bottom: -26%;
   }
 
-  /* .field>picture:nth-child(4)>.flower {
-    width: 20rem;
-    bottom: -23%;
-  } */
+  .field>picture:nth-child(4)>.flower {
+    width: 21rem;
+    right: 6%;
+    bottom: -21%;
+  }
 
   .field>picture:nth-child(5)>.flower {
     right: -7%;
-    bottom: -21.5%;
+    bottom: -26.5%;
   }
 }
 

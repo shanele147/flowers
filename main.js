@@ -5,32 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeBtn = document.getElementById("close-popup");
   let currentAudio = null;
 
-  document.querySelectorAll(".flower").forEach((flower) => {
-    flower.addEventListener("click", () => {
-      // 1. Handle Audio - Stop old audio if playing
-      if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-      }
-
-      // Play new song if data-song exists
-      const songSrc = flower.dataset.song;
-      if (songSrc) {
-        currentAudio = new Audio(songSrc);
-        currentAudio.play().catch(e => console.log("Audio play failed (user interaction needed?):", e));
-      }
-
-      // 2. Handle Popup
-      popupMessage.textContent = flower.dataset.message;
-      popup.classList.remove("hidden");
-
-      // Flower position
-      const rect = flower.getBoundingClientRect();
-
+  function positionPopup(flowerRect, popupBox) {
       // Calculate position
       // Default: center of flower, slightly above
-      let left = rect.left + rect.width / 2;
-      let top = rect.top;
+      let left = flowerRect.left + flowerRect.width / 2;
+      let top = flowerRect.top;
 
       // Get popup dimensions (now that it's visible)
       // We need to briefly remove hidden to measure, but we already did above.
@@ -61,18 +40,54 @@ document.addEventListener("DOMContentLoaded", () => {
       if (top < padding) {
         // If it goes off top, maybe show it BELOW the flower instead?
         // Let's try to flip it below if top is negative
-        const alternativeTop = rect.bottom + 20;
+        const alternativeTop = flowerRect.bottom + 20;
         if (alternativeTop + boxHeight < viewportHeight - padding) {
-          top = alternativeTop;
+
         } else {
           // If both fail, just pin to top
           top = padding;
         }
       }
 
-      // Apply directly
+      return {left, top};
+  }
+
+  document.querySelectorAll(".flower").forEach((flower) => {
+    flower.addEventListener("click", () => {
+      // 1. Handle Audio - Stop old audio if playing
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
+
+      // Play new song if data-song exists
+      const songSrc = flower.dataset.song;
+      if (songSrc) {
+        if (!currentAudio) {
+          currentAudio = new Audio();
+        }
+        currentAudio.src = songSrc;
+        currentAudio.load();
+      }
+
+      // 2. Handle Popup
+      popupMessage.textContent = flower.dataset.message;
+      popup.classList.remove("hidden");
+
+      // Flower position
+      const rect = flower.getBoundingClientRect();
+
+      const {left, top} = positionPopup(rect, popupBox);
+
       popupBox.style.left = left + "px";
       popupBox.style.top = top + "px";
+
+      // Now play the audio
+      if (songSrc) {
+        currentAudio.play().catch(e => {
+          popupMessage.textContent = "Unable to play audio: " + e.message;
+        });
+      }
     });
   });
 
