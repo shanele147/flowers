@@ -54,7 +54,11 @@ body {
   bottom: -20%;
   cursor: pointer;
   transform: translate(-50%, -50%);
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease;
+  -webkit-transition: transform 0.3s ease;
+  -moz-transition: transform 0.3s ease;
+  -ms-transition: transform 0.3s ease;
+  -o-transition: transform 0.3s ease;
 }
 
 .field > picture:nth-child(1) > .flower {
@@ -84,7 +88,16 @@ body {
 }
 
 .flower:hover {
-  transform: translate(-50%, -50%) scale(1.1);
+  transform: translate(-50%, -55%) scale(1.05);
+  -webkit-transform: translate(-50%, -55%) scale(1.05);
+  -moz-transform: translate(-50%, -55%) scale(1.05);
+  -ms-transform: translate(-50%, -55%) scale(1.05);
+  -o-transform: translate(-50%, -55%) scale(1.05);
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
 }
 
 /* Popup styling */
@@ -122,9 +135,6 @@ body {
   /* Enable clicking button */
   min-width: 180px;
   animation: fadeIn 0.25s ease-out;
-  /* box-sizing: border-box;
-  max-width: calc(100% - 40px);
-  overflow-wrap: break-word; */
 }
 
 #close-popup {
@@ -345,7 +355,7 @@ body {
   .field > picture:nth-child(3) > .flower {
     width: 17.5rem;
     left: 50%;
-    bottom: -30%;
+    bottom: -29%;
   }
   .field > picture:nth-child(4) > .flower {
     width: 22rem;

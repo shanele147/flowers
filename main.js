@@ -8,6 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const cssMobileFlagName = '--is-mobile-portrait';
   const fallbackMobileQuery = '(max-width: 480px) and (orientation: portrait)';
 
+  function isMobilePortraitFromCssOrFallback(cssFlag) {
+    if (cssFlag) {
+      return cssFlag === '1';
+    }
+    return !!(window.matchMedia && window.matchMedia(fallbackMobileQuery).matches);
+  }
+
   function positionPopup(flowerRect, popupBox) {
       // Calculate position
       // Default: center of flower, slightly above
@@ -33,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Determine mobile-portrait from CSS variable single source of truth; fallback to media query
       const cssFlag = getComputedStyle(document.documentElement).getPropertyValue(cssMobileFlagName).trim();
-      const isMobilePortrait = cssFlag ? cssFlag === '1' : (window.matchMedia && window.matchMedia(fallbackMobileQuery).matches);
+      const isMobilePortrait = isMobilePortraitFromCssOrFallback(cssFlag);
 
       // Prevent overflow Right
       // If on a narrow mobile in portrait, make the popup full-width (viewport minus padding)
