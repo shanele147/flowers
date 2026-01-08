@@ -1,3 +1,13 @@
+:root {
+  --is-mobile-portrait: 0;
+}
+
+@media (max-width: 480px) and (orientation: portrait) {
+  :root {
+    --is-mobile-portrait: 1;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -189,8 +199,8 @@ body {
   }
 
   .field > picture:nth-child(5) > .flower {
-    right: -12%;
-    bottom: -30.5%;
+    right: -10%;
+    bottom: -29.5%;
     width: 17rem;
   }
 }

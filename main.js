@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const popupMessage = document.getElementById("popup-message");
   const closeBtn = document.getElementById("close-popup");
   let currentAudio = null;
+  let lastFlowerRect = null;
+  const cssMobileFlagName = '--is-mobile-portrait';
+  const fallbackMobileQuery = '(max-width: 480px) and (orientation: portrait)';
 
   function positionPopup(flowerRect, popupBox) {
       // Calculate position
@@ -25,20 +28,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Constrain to Viewport
       const padding = 20;
-      const viewportWidth = window.innerWidth;
-      const viewportHeight = window.innerHeight;
+      const viewportWidth = (window.visualViewport && window.visualViewport.width) || document.documentElement.clientWidth || window.innerWidth;
+      const viewportHeight = (window.visualViewport && window.visualViewport.height) || document.documentElement.clientHeight || window.innerHeight;
+
+      // Determine mobile-portrait from CSS variable single source of truth; fallback to media query
+      const cssFlag = getComputedStyle(document.documentElement).getPropertyValue(cssMobileFlagName).trim();
+      const isMobilePortrait = cssFlag ? cssFlag === '1' : (window.matchMedia && window.matchMedia(fallbackMobileQuery).matches);
 
       // Prevent overflow Right
       // If on a narrow mobile in portrait, make the popup full-width (viewport minus padding)
-      // and center it in the device viewport for better UX.
-      const isMobilePortrait = window.matchMedia && window.matchMedia('(max-width: 480px) and (orientation: portrait)').matches;
+      // Set inline width first, then re-measure height to avoid stale measurements.
       if (isMobilePortrait) {
-        const fullWidth = viewportWidth - padding * 2;
+        const fullWidth = Math.max(0, viewportWidth - padding * 2);
         popupBox.style.width = fullWidth + "px";
+        // Re-measure after forcing width
+        const newRect = popupBox.getBoundingClientRect();
+        const newBoxHeight = newRect.height;
         // pin to left padding (centered because width = viewport - 2*padding)
         left = padding;
         // center vertically in viewport while respecting top padding
-        top = Math.max(padding, (viewportHeight - boxHeight) / 2);
+        top = Math.max(padding, (viewportHeight - newBoxHeight) / 2);
         return {left, top};
       }
       if (left + boxWidth > viewportWidth - padding) {
@@ -88,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Flower position
       const rect = flower.getBoundingClientRect();
+      lastFlowerRect = rect;
 
       const {left, top} = positionPopup(rect, popupBox);
 
@@ -121,6 +131,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (currentAudio) {
       currentAudio.pause();
     }
+    // Clear stored rect and any inline width when closed
+    lastFlowerRect = null;
+    popupBox.style.width = '';
   });
 
   popup.addEventListener("click", (e) => {
@@ -128,4 +141,21 @@ document.addEventListener("DOMContentLoaded", () => {
       popup.classList.add("hidden");
     }
   });
+
+  // Recompute popup position and clear inline width when viewport changes
+  function handleViewportChange() {
+    // Clear any forced inline width so CSS rules can apply
+    popupBox.style.width = '';
+    if (lastFlowerRect && !popup.classList.contains('hidden')) {
+      const {left, top} = positionPopup(lastFlowerRect, popupBox);
+      popupBox.style.left = left + 'px';
+      popupBox.style.top = top + 'px';
+    }
+  }
+
+  window.addEventListener('resize', handleViewportChange);
+  window.addEventListener('orientationchange', handleViewportChange);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', handleViewportChange);
+  }
 });
