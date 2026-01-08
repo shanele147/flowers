@@ -29,6 +29,18 @@ document.addEventListener("DOMContentLoaded", () => {
       const viewportHeight = window.innerHeight;
 
       // Prevent overflow Right
+      // If on a narrow mobile in portrait, make the popup full-width (viewport minus padding)
+      // and center it in the device viewport for better UX.
+      const isMobilePortrait = window.matchMedia && window.matchMedia('(max-width: 480px) and (orientation: portrait)').matches;
+      if (isMobilePortrait) {
+        const fullWidth = viewportWidth - padding * 2;
+        popupBox.style.width = fullWidth + "px";
+        // pin to left padding (centered because width = viewport - 2*padding)
+        left = padding;
+        // center vertically in viewport while respecting top padding
+        top = Math.max(padding, (viewportHeight - boxHeight) / 2);
+        return {left, top};
+      }
       if (left + boxWidth > viewportWidth - padding) {
         left = viewportWidth - boxWidth - padding;
       }

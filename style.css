@@ -112,6 +112,9 @@ body {
   /* Enable clicking button */
   min-width: 180px;
   animation: fadeIn 0.25s ease-out;
+  /* box-sizing: border-box;
+  max-width: calc(100% - 40px);
+  overflow-wrap: break-word; */
 }
 
 #close-popup {
@@ -176,13 +179,13 @@ body {
   .field > picture:nth-child(3) > .flower {
     width: 18rem;
     left: 49%;
-    bottom: -29%;
+    bottom: -28%;
   }
 
   .field > picture:nth-child(4) > .flower {
     width: 21rem;
-    left: 70%;
-    bottom: -21%;
+    left: 72%;
+    bottom: -19%;
   }
 
   .field > picture:nth-child(5) > .flower {
@@ -190,34 +193,6 @@ body {
     bottom: -30.5%;
     width: 17rem;
   }
-}
-
-@media screen and (min-width: 1280px) {
-  html {
-    font-size: 13px;
-  }
-
-  /* .flower {
-    bottom: -19%;
-  }
-
-  .field > picture:nth-child(1) > .flower {
-    width: 17rem;
-  }
-
-  .field > picture:nth-child(3) > .flower {
-    bottom: -27%;
-  }
-
-  .field > picture:nth-child(4) > .flower {
-    width: 22rem;
-    bottom: -21%;
-  }
-
-  .field > picture:nth-child(5) > .flower {
-    right: -7%;
-    bottom: -28%;
-  } */
 }
 
 @media screen and (max-width: 480px) {
@@ -351,27 +326,27 @@ body {
   .field > picture:nth-child(1) > .flower {
     width: 17rem;
     left: 10%;
-    bottom: -30%;
+    bottom: -32%;
   }
   .field > picture:nth-child(2) > .flower {
     left: 30%;
-    bottom: -33%;
+    bottom: -36%;
   }
   .field > picture:nth-child(3) > .flower {
     width: 17.5rem;
     left: 50%;
-    bottom: -27%;
+    bottom: -30%;
   }
   .field > picture:nth-child(4) > .flower {
     width: 22rem;
-    bottom: -21%;
+    bottom: -23%;
     left: 70%;
   }
   .field > picture:nth-child(5) > .flower {
     left: 89%;
     width: 18rem;
     /* right: -7%; */
-    bottom: -30%;
+    bottom: -34%;
   }
 
   /* ensure no individual overrides interfere */
